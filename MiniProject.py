@@ -15,7 +15,7 @@ action_space = env.action_space
 #   Training Parameters
 # ========================
 D = observation_space.shape[0]
-H = 3
+H = 50
 LEARNING_RATE = 1e-2
 BATCH_SIZE = 5
 GAMMA = 0.99
