@@ -3,7 +3,7 @@ import numpy as np
 import tensorflow as tf
 import gym
 import time
-from policyagentv2 import PolicyAgent
+from Agent import PolicyAgent
 
 
 # Open environment
