@@ -22,7 +22,7 @@ LEARNING_RATE = 0.01
 BATCH_SIZE = 4
 GAMMA = 0.97
 LOW_PASS_AMOUNT = 4
-RENDER_FREQUENCY = 200
+RENDER_FREQUENCY = 1000
 TOTAL_EPISODES = 10000
 A = action_space.n
 REWARD_TO_BEAT = 475
@@ -32,7 +32,7 @@ USE_E_GREEDY = False
 
 # Parameters for e-greedy, does nothing if use_e_greedy is false
 E = 0.9
-E_DECAY = 0.0015
+E_DECAY = 0.001
 
 
 # Helper function to discount the reward
@@ -84,10 +84,7 @@ start_time = time.time()
 
 while episode_number < TOTAL_EPISODES:
     # Render some episodes to see progress
-    """if episode_number % RENDER_FREQUENCY == 0:
-        env.render()"""
-
-    if episode_number % RENDER_FREQUENCY < 5:
+    if episode_number % RENDER_FREQUENCY == 0:
         env.render()
 
     # Calculate q
