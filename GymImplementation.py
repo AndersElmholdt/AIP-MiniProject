@@ -87,11 +87,11 @@ while episode_number < TOTAL_EPISODES:
     if episode_number % RENDER_FREQUENCY == 0:
         env.render()
 
-    # Calculate q
+    # Calculate best action
     x = np.reshape(observation, [1,D])
     output_action = sess.run(agent.output, feed_dict={agent.state: x})
 
-    # Calculate action
+    # Exploration vs. exploitation
     if USE_E_GREEDY:
         action = np.argmax(output_action)
         if np.random.uniform() < E:
@@ -117,7 +117,7 @@ while episode_number < TOTAL_EPISODES:
             print "Environment solved in {} episodes.".format(episode_number)
             break
 
-        # Decay E
+        # Decay E (Only used for E-greedy)
         if USE_E_GREEDY:
             E = E * (1 - E_DECAY)
 
@@ -127,7 +127,7 @@ while episode_number < TOTAL_EPISODES:
         # Append episode reward to list
         ar.append(episode_reward)
 
-        # Store info for episode
+        # Store info for episode (Store history)
         epx = np.vstack(xs)
         epy = np.array(ys)
         epr = np.array(rs)
@@ -174,9 +174,11 @@ def low_pass(in_array, strength):
 
         in_array[i + strength] = running_total / (strength + 1)
 
-# Plot data
+# Plot original data
 plt.subplot(1,2,1)
 plt.plot(ar)
+
+# Plot low pass data
 plt.subplot(1,2,2)
 low_pass(ar, LOW_PASS_AMOUNT)
 plt.plot(ar)
